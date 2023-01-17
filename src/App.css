@@ -1,0 +1,18 @@
+.app {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+
+.light {
+    background-color: white;
+}
+
+.dark {
+    background-color: rgb(33, 32, 32);
+    color: white;
+}
