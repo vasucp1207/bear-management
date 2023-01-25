@@ -1,21 +1,32 @@
-import create from 'zustand'
-import { persist } from 'zustand/middleware'
+import create from 'zustand';
 
-export const useStore = create(set => ({
-    bears: 0,
-    theme: 'light',
-    increasePopulation: () => set(state => ({ bears: state.bears + 1 })),
-    toogleTheme: () => set(state => ({ theme: state.theme==='light'? 'dark': 'light' }))
+export const useStore = create((set) => ({
+    allPhotos: [],
+    getAllPhotos: async () => {
+        const response = await fetch('https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json')
+        set({allPhotos: await (response).json()})
+    },
+    toogleFavoriteFn: (allPhotosArr, id) => {
+        const updatedArr = allPhotosArr.map(photo => {
+            if(photo.id === id) {
+                return {
+                    ...photo,
+                    isFavorite: !photo.isFavorite
+                }
+            }
+            return photo
+        })
+        console.log(updatedArr)
+        set({allPhotos: updatedArr})
+    },
+    cartItems: [],
+    addCartItems: (photo) => {
+        set(state => ({
+            cartItems: [...state.cartItems, photo]
+        }))
+    },
+    removeCartItems: (allCartItems, id) => {
+        const updatedArr = allCartItems.filter((item) => item.id !== id);
+        set({cartItems: updatedArr})
+    }
 }))
-
-export const useFishStore = create(
-    persist(
-        (set, get) => ({
-            fishes: 0,
-            addFish: () => set({ fishes: get().fishes + 1 })
-        }),
-        {
-            name: 'fishStore',
-        }
-    )
-)

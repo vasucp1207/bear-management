@@ -1,18 +1,29 @@
-.app {
-    width: 100vw;
-    height: 100vh;
+.img {
+    height: 200px;
+    width: 200px;
+    background-repeat: no-repeat;
+    object-fit: cover;
+}
+
+.img-cont {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-    align-items: center;
+    flex-wrap: wrap;
 }
 
-.light {
-    background-color: white;
+.img-wrap {
+    position: relative;
 }
 
-.dark {
-    background-color: rgb(33, 32, 32);
-    color: white;
+.icon {
+    cursor: pointer;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+}
+
+.add-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 2%;
+    right: 2%;
 }
